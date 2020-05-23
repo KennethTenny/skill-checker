@@ -15,11 +15,19 @@ app.use(express.json());
 const uri = process.env.ATLAS_URI;
 // const client = new MongoClient(uri, { useNewUrlParser: true });
 
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true } );
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log("DB connected!");
+// mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true } );
+// const connection = mongoose.connection;
+// connection.once('open', () => {
+//     console.log("DB connected!");
+// });
+
+
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true } ).then(() => {
+console.log("Connected to Database");
+}).catch((err) => {
+    console.log("Not Connected to Database ERROR! ", err);
 });
+
 
 // client.connect(err => {
 //   const collection = client.db("test").collection("devices");
